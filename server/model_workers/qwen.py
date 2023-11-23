@@ -9,6 +9,7 @@ from typing import List, Literal, Dict
 from fastchat import conversation as conv
 from server.model_workers.base import *
 from server.model_workers.base import ApiEmbeddingsParams
+import dashscope
 
 
 class QwenWorker(ApiModelWorker):
@@ -29,7 +30,7 @@ class QwenWorker(ApiModelWorker):
         self.version = version
 
     def do_chat(self, params: ApiChatParams) -> Dict:
-        import dashscope
+        # import dashscope
         params.load_config(self.model_names[0])
 
         gen = dashscope.Generation()
@@ -56,7 +57,7 @@ class QwenWorker(ApiModelWorker):
                 }
 
     def do_embeddings(self, params: ApiEmbeddingsParams) -> Dict:
-        import dashscope
+        # import dashscope
         params.load_config(self.model_names[0])
 
         result = []
@@ -100,8 +101,8 @@ if __name__ == "__main__":
 
     worker = QwenWorker(
         controller_addr="http://127.0.0.1:20001",
-        worker_addr="http://127.0.0.1:20007",
+        worker_addr="http://127.0.0.1:21006",
     )
     sys.modules["fastchat.serve.model_worker"].worker = worker
     MakeFastAPIOffline(app)
-    uvicorn.run(app, port=20007)
+    uvicorn.run(app, port=21006)
