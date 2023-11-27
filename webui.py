@@ -45,7 +45,7 @@ if __name__ == "__main__":
             use_column_width=True
         )
         st.caption(
-            f"""<p align="right">当前版本：{VERSION}</p>""",
+            # f"""<p align="right">当前版本：{VERSION}</p>""",
             unsafe_allow_html=True,
         )
         options = list(pages)
